@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Bootstrap 101 Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="@Path['~/Content/Css/bootstrap.min.css']" rel="stylesheet" media="screen">
+    
+</head>
+<body>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>
+                <img src="../Content/Nancy.jpg" height="64" width="64" />
+                TodoNancyFx</h1>
+        </div>
+        <p class="lead">This is a sample the one small app web  with NancyFx Lightweight Framework and Simple.Data a lightweight and dynamic data access. </p>
+        <p>
+            <form class="form-inline" method="post">
+                <input type="text" class="span8" name="Task" placeholder="Your Task Here">
+                <button type="submit" class="btn btn-large btn-primary">Add</button>
+            </form>
+        </p>
+
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#notdone" data-toggle="tab">Not Done</a></li>
+            <li><a href="#done" data-toggle="tab">Done</a></li>
+        </ul>
+
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade in active" id="notdone">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="span9">Task</th>
+                            <th>IsDone</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @Each.Model.NotDone
+                        <tr>
+                            <td>@Current.Task</td>
+                            <td>@Current.IsDone</td>
+                            <td>
+                                <a href="/done/@Current.TaskId/true" class="btn btn-mini btn-success">Done</a>
+                                <a href="/delete/@Current.TaskId" class="btn btn-mini btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        @EndEach
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="done">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="span9">Task</th>
+                            <th>IsDone</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @Each.Model.IsDone
+                        <tr>
+                            <td>@Current.Task</td>
+                            <td>@Current.IsDone</td>
+                            <td>
+                                <a href="/done/@Current.TaskId/false" class="btn btn-mini btn-success">Not Done</a>
+                                <a href="/delete/@Current.TaskId" class="btn btn-mini btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        @EndEach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <script src="@Path['~/Content/Scripts/jquery-1.9.1.js']"></script>
+    <script src="@Path['~/Content/Scripts/bootstrap.js']"></script>
+    
+</body>
+</html>
